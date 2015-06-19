@@ -12,7 +12,7 @@ var Forms  = {
         } else if(type == 'checkbox') {
             return Forms.buildCheckbox(options);
         } else if(type == 'radio') {
-            return Forms.buildRadio(options);
+            return Forms.fun.buildRadio(options);
         } else {
             return Forms.fun.buildInput(type, options);
         }
@@ -44,6 +44,34 @@ var Forms  = {
             var bodyWrapper = Forms.fun.buildBodyWrapper([input]);
             els.push(bodyWrapper);
             return Forms.fun.buildWrapper(els);
+        },
+        buildRadio: function(options){
+            var name = options.name;
+            var els = [];
+            for(var i in options.buttons) {
+                var b = options.buttons[i];
+                b.type = 'radio';
+                b.name = name;
+                var radio = newElement('input', b);
+                if(b.label) {
+                    var labelOpts = {label: b.label};
+                    if(options.id && b.value) {
+                        labelOpts['id'] = options.id + '_'+ b.value;
+                        radio.setAttribute('id', options.id + '_'+ b.value);
+                    }
+
+                    var label = Forms.fun.buildCommonLabel(labelOpts);
+                    if(label.childNodes.length == 0) {
+                        label.appendChild(radio)
+                    } else {
+                        label.insertBefore(radio, label.childNodes[0])
+                    }
+                    els.push(label);
+                } else {
+                    els.push(radio)
+                }
+            }
+            return Forms.fun.buildWrapper(els)
         },
         buildWrapper: function(els){
             return newElement('div', {'class': Forms.fun.classes.wrapper}, els);
