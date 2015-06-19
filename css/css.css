@@ -1,0 +1,35 @@
+.tab-header{
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+.tab-header a{
+    border: 1px solid gray;
+    padding: 5px;
+    display: block;
+    margin-bottom: 3px;
+}
+.tab-header a.active{
+    background-color: beige;
+}
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after,
+.container:after {
+    clear: both;
+}
+.input-wrapper{
+    margin-bottom: 10px;
+}
+.input-wrapper textarea{
+    min-width: 400px;
+    min-height: 60px;
+}
+.hidden{
+    display: none;
+}
+.left{
+    float: left;
+}
