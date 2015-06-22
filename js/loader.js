@@ -3,7 +3,9 @@ var Loader = {
         'parse/code/properties.container.js',
         'parse/code/function.arguments.js',
         'parse/code/hql.to.sql.js',
-        'convert/code.style.js'
+        'convert/code.style.js',
+        'jira/log.work.js',
+        'convert/add.quotes.js'
     ],
     objects: {},
     start: function(){
