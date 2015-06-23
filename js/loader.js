@@ -3,9 +3,14 @@ var Loader = {
         'parse/code/properties.container.js',
         'parse/code/function.arguments.js',
         'parse/code/hql.to.sql.js',
+
         'convert/code.style.js',
+        'convert/add.quotes.js',
+
         'jira/log.work.js',
-        'convert/add.quotes.js'
+
+
+        'components/grid.js'
     ],
     objects: {},
     start: function(){
@@ -47,9 +52,11 @@ var Loader = {
             el.remove();
             order[el.getAttribute('data-tab')] = el;
         }
-
         for(var j in order) {
             if(order[j]) header.appendChild(order[j]);
+        }
+        if(document.location.hash) {
+            this.openTab(document.location.hash.substring(1, document.location.hash.length))
         }
     },
     openTab: function(name){
@@ -65,8 +72,12 @@ var Loader = {
         var els = document.body.getAll('.tab-header a');
         for(var j = 0; j < els.length; j++) {
             var h = els[j];
-            if(h.getAttribute('data-tab') == name) {
+            var tabUrl = h.getAttribute('data-tab');
+            if(tabUrl == name) {
                 h.addClass('active');
+                if(document.location.hash != '#' + tabUrl) {
+                    document.location.hash = tabUrl;
+                }
             } else {
                 h.removeClass('active');
             }

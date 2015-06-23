@@ -25,7 +25,6 @@ Loader.objects['convert/code.style.js'] = {
     },
     onsubmit: function(){
         var v = this.input.value.split('\n');
-        var regexp;
 
 
         for(var i = 0; i < v.length;i++){
@@ -37,7 +36,12 @@ Loader.objects['convert/code.style.js'] = {
                     if(this.radio.underscore_to_camel.checked) {
                         lll[c] = lll[c].replace(/_([a-z])/g, function (g) { return g[1].toUpperCase(); });
                     } else {
-                        lll[c] = lll[c].replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
+                        var regexp = /([a-z])([A-Z])/g;
+                        if(lll[c].match(regexp)) {
+                            lll[c] = lll[c].replace(regexp, '$1_$2').toLowerCase();
+                        } else {
+                            console.log(lll[c].match(regexp));
+                        }
                     }
                 }
                 l.push(lll.join('.'));
