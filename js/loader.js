@@ -10,7 +10,8 @@ var Loader = {
         'jira/log.work.js',
 
 
-        'components/grid.js'
+        'components/grid.js',
+        'components/autocomplete.js'
     ],
     objects: {},
     start: function(){

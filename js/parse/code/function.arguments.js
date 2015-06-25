@@ -26,7 +26,7 @@ Loader.objects['parse/code/function.arguments.js'] = {
             v[i] = v[i].split('=');
 
             //if there is class declaration
-            v[i][0] = v[i][0].split(' ');
+            v[i][0] = v[i][0].trim().split(' ');
             if(v[i][0].length == 1) {
                 v[i][0] = v[i][0][0];
             } else {
