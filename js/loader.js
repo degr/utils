@@ -11,7 +11,9 @@ var Loader = {
 
 
         'components/grid.js',
-        'components/autocomplete.js'
+        'components/autocomplete.js',
+
+        'db/search.in.database.js'
     ],
     objects: {},
     start: function(){
