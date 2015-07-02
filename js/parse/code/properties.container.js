@@ -18,9 +18,9 @@ Loader.objects['parse/code/properties.container.js'] = {
     onsubmit: function(){
         var v = this.input.value.split('\n');
         var v2 = [];
-        for(var i = 0; i < v.length;i++){
-            if(v[i].indexOf(this.propName.value) > -1){
-                v2.push(v[i]);
+        for(var g = 0; g < v.length;g++){
+            if(v[g].indexOf(this.propName.value) > -1){
+                v2.push(v[g]);
             }
         }
 
@@ -37,11 +37,12 @@ Loader.objects['parse/code/properties.container.js'] = {
         }
         var out = {};
         this.output.value = '';
-        for(var i = 0; i < v3.length; i++){
-            out[v3[i]] = 'private String '+v3[i]+';';
+        for(var c = 0; c < v3.length; c++){
+            out[v3[c]] = 'private String '+v3[c]+';';
         }
-        for(var i in out){
-            this.output.value += out[i]+'\n';
+        var keys = Object.keys(out).sort();
+        for(var k = 0; k < keys.length; k++){
+            this.output.value += out[keys[k]]+'\n';
         }
 
     }

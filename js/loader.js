@@ -6,7 +6,7 @@ var Loader = {
 
         'convert/code.style.js',
         'convert/add.quotes.js',
-
+        'convert/from.to.preffix.suffix.js',
         'jira/log.work.js',
 
 
