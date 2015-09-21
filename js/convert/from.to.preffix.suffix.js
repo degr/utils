@@ -14,7 +14,7 @@ Loader.objects['convert/from.to.preffix.suffix.js'] = {
     createGui: function(){
         var name = 'convert/from.to.preffix.suffix.js';
 
-        var input = Forms.createElement('textarea', {label: 'Insert input code here:'});
+        var input = Forms.createElement('textarea', {label: 'Insert input code here:', attr: {onblur: "Loader.objects['"+name+"'].onInputBlur(this)"}});
 
         var fromSuffix = Forms.createElement('input', {label: 'Insert your preffix name:'});
         var toSuffix = Forms.createElement('textarea', {label: 'Insert preffix replacement name:'});
@@ -51,6 +51,7 @@ Loader.objects['convert/from.to.preffix.suffix.js'] = {
 
         for(var i = 0; i < v.length;i++){
             var r = v[i].trim();
+            if(!r)continue;
             if(r.indexOf(fromS) == 0) {
 
                 var v2 = r.substring(fromS.length, r.length).trim();
@@ -65,5 +66,42 @@ Loader.objects['convert/from.to.preffix.suffix.js'] = {
             v[i] = r;
         }
         this.output.value = (v.join("\n"));
+    },
+    onInputBlur: function(el){
+        var pass1 = this.fromSuffix.value == '';
+        var pass2 = this.fromPostfix.value == '';
+        var text = el.value;
+        if(!pass1 || !pass2 || text.length == 0) return;
+        var rows = text.split('\n');
+
+        var comparator = {};
+        for(var i = 0; i < rows.length; i++) {
+            var r = rows[i].trim();
+            var words = r.split(' ');
+            for(var j = 0; j < rows.length; j++) {
+                if(j == i) continue;
+                var phrase = null;
+                for(var k = 0; k < words.length; k++) {
+                    phrase = phrase == null ? words[k]: phrase + " " + words[k];
+                    if(!phrase)continue;
+                    if(rows[j].trim().indexOf(phrase) == 0) {
+                        comparator[phrase] = comparator[phrase] ? comparator[phrase] + 1 : 1;
+                    }
+                }
+            }
+        }
+        var max = {key: null, value: null};
+        for(var key in comparator) {
+            var v = comparator[key];
+            if(max.value == null || max.value <= v) {
+                if(max.key == null || (max.key.length < key.length && max.value <= v)) {
+                    max.key = key;
+                    max.value = v;
+                }
+            }
+        }
+        if(max.key != null) {
+            this.fromSuffix.value = max.key +' ';
+        }
     }
 };

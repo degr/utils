@@ -6,6 +6,7 @@ var Loader = {
 
         'convert/code.style.js',
         'convert/add.quotes.js',
+        'convert/properties.to.java.js',
         'convert/from.to.preffix.suffix.js',
         'jira/log.work.js',
 
@@ -13,7 +14,10 @@ var Loader = {
         'components/grid.js',
         'components/autocomplete.js',
 
-        'db/search.in.database.js'
+        'db/search.in.database.js',
+        'uncommon/color.triangle.js',
+        'convert/json.to.form.js',
+        'convert/json.to.classes.js'
     ],
     objects: {},
     start: function(){

@@ -6,13 +6,13 @@
  */
 Loader.objects['jira/log.work.js'] = {
     createGui: function(){
-        var code = "var sYear = prompt('Enter start year: ');\n"+
-                "var sMonth = prompt('Enter start month : ');\n"+
-                "var sDay = prompt('Enter start day: ');\n"+
+        var code = "var sYear = prompt('Enter start year: ', new Date().getFullYear());\n"+
+                "var sMonth = prompt('Enter start month : ', new Date().getMonth()+1);\n"+
+                "var sDay = prompt('Enter start day: ', 1);\n"+
                 "\n"+
-                "var eYear = prompt('Enter end year: ');\n"+
-                "var eMonth = prompt('Enter end month : ');\n"+
-                "var eDay = prompt('Enter end day: ');\n"+
+                "var eYear = prompt('Enter end year: ', new Date().getFullYear());\n"+
+                "var eMonth = prompt('Enter end month : ', new Date().getMonth()+1);\n"+
+                "var eDay = prompt('Enter end day: ', (function (m, y) {return m===2 ? y & 3 || !(y%25) && y & 15 ? 28 : 29 : 30 + (m+(m>>3)&1);})(new Date().getMonth()+1, new Date().getFullYear()));\n"+
                 "\n"+
                 "if(sYear && sMonth && sDay && eYear && eMonth && eDay) {\n"+
                 "	var sDate = new Date(sYear, sMonth-1, sDay);\n"+

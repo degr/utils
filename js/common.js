@@ -50,3 +50,10 @@ Element.prototype.get = function(t){
 Element.prototype.getAll = function(t){
     return this.querySelectorAll(t);
 };
+
+String.prototype.ucfirst = function(){
+    return this.charAt(0).toUpperCase() + this.substr(1);
+};
+String.prototype.lcfirst = function(){
+    return this.charAt(0).toLowerCase() + this.substr(1);
+};
