@@ -20,13 +20,15 @@ Loader.objects['convert/json.to.form.js'] = {
         var withoutValues = Forms.createElement('checkbox', {'buttons':[{label: 'Without values (empty form)'}]});
         var submit = Forms.createElement('submit', {attr:{value: 'Process:'}});
         var output = Forms.createElement('textarea', {label: 'Your form code here:'});
-
+        var iframe = newElement('iframe', {name: 'json_submit_iframe'});
+        var formContainer = newElement('div', {id: 'json_submit_form_container'});
+        
         this.input = input.get('textarea');
         this.url = url.get('input');
         this.output = output.get('textarea');
         this.withoutValues = withoutValues.get('input');
         this.radio = radio.getAll('input[type="radio"]');
-        return newElement('form', {onsubmit: "Loader.objects['"+name+"'].onsubmit(); return false;"}, [input, url, radio,withoutValues, submit, output]);
+        return newElement('form', {onsubmit: "Loader.objects['"+name+"'].onsubmit(); return false;"}, [input, url, radio,withoutValues, submit, output, formContainer, iframe]);
     },
     getMethod: function(){
         for(var i = 0; i < this.radio.length; i++){
@@ -58,6 +60,10 @@ Loader.objects['convert/json.to.form.js'] = {
         elems.push(Forms.createElement('submit'));
         var form = newElement('form', {method: method, action: url}, elems);
         this.output.value = form.outerHTML;
+        form.target = 'json_submit_iframe';
+        var formContainer = document.getElementById('json_submit_form_container');
+        formContainer.innerHTML = '';
+        formContainer.appendChild(form);
     },
     buildElement: function(key, o, preffix){
         var out;

@@ -33,16 +33,21 @@ Loader.objects['convert/json.to.classes.js'] = {
         }
         this.output.value = elems.join("\n\n\n======================\n\n\n");
     },
-    buildClass: function(key, o){
+    buildClass: function(key, o, topClass){
         var out = 'class ' + key.ucfirst() + "{\n";
         var inner = [];
         var vars = [];
-        for(var i in o) {
-            if(typeof o[i] == 'object') {
-                inner.push({key:i, value: o[i]});
+        if(typeof o === 'string' | typeof o === 'number' | typeof o === 'boolean') {
+            vars.push(key);
+        } else {
+            for (var i in o) {
+                console.log(typeof o[i] == 'object', typeof o[i]);
+                if (typeof o[i] == 'object') {
+                    inner.push({key: i, value: o[i]});
+                }
+                vars.push(i);
+                out += "\tprivate $" + i + ";\n";
             }
-            vars.push(i);
-            out += "\tprivate $" + i+";\n";
         }
         for(var v = 0; v < vars.length; v++) {
             out += this.buildGetterAndSetter(vars[v], true);

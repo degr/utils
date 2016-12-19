@@ -1,7 +1,7 @@
 /**
  * Created by rsmirnou on 6/19/2015.
  */
-function newElement(tag, attr, elements){
+function newElement(tag, attr, elements, html){
     var e=document.createElement(tag);
     for(var i in attr){e.setAttribute(i, attr[i]);};
     if(elements){
